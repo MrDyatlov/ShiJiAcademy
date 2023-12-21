@@ -2,16 +2,16 @@
 # Server
 import socket
 
-ip = "192.168.25.205"
-port = 8080
+class SafeYourChild:
 
-safety_connection = socket.socket(family=socket.AF_INET, type=socket.SOCK_STREAM)
-safety_connection.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-safety_connection.bind(("10.0.2.5", 8080))
-print("binding to" + ip)
-safety_connection.listen(1)
-print("bind listening...")
+    def __init__(self, ip, port):
+        self.safety_connection = socket.socket(family=socket.AF_INET, type=socket.SOCK_STREAM)
+        self.safety_connection.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        self.safety_connection.bind((ip, port))
+        print("binding to" + ip)
+        self.safety_connection.listen(0)
+        print("bind listening...")
+        (self.safechild_connection, adress) = self.safety_connection.accept()
+        print("connection succesfully to" + str(adress))
 
-safechild_connection, adress = safety_connection.accept()
-print("connection succesfully to" + str(adress))
-
+save_your_child = SafeYourChild("10.0.2.5", 1234)

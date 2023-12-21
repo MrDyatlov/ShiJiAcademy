@@ -2,8 +2,11 @@
 # Client
 import socket
 
-ip = "192.168.25.242"
-port = 8080
+class SafeChild:
 
-safechild_connection = socket.socket(family=socket.AF_INET, type=socket.SOCK_STREAM)
-safechild_connection.connect(("10.0.2.15", 8080))
+
+    def __init__(self, ip, port):
+        self.safechild_connection = socket.socket(family=socket.AF_INET, type=socket.SOCK_STREAM)
+        self.safechild_connection.connect((ip, port))
+
+save_your_child = SafeChild("10.0.2.5", 1234)
